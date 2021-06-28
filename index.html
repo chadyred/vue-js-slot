@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+</head>
+<body>
+
+<div id="app">
+    <span id="randomized-number"></span>
+    <coucou-tu-veux-voir-ma-tralala>
+        <template v-slot:default="slotProps">
+            Replace with that [[ slotProps.myName ]]
+        </template>
+
+        <template v-slot:footer="slotPropsFooter">
+            Mon super footer du jour [[ slotPropsFooter.today ]]
+        </template>
+    </coucou-tu-veux-voir-ma-tralala>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+<script>
+    Vue.component('coucou-tu-veux-voir-ma-tralala', {
+        data: function () {
+            return {
+                name: "A name",
+                today: 'monday',
+            }
+        },
+        template: `
+<span>
+    <button type="submit"><slot v-bind:myName="name"></slot></button>
+    <button type="submit"><slot v-bind:myName="name"></slot></button>
+    <footer><slot name="footer" :today="today"></slot></footer>
+</span>
+        `,
+    });
+
+    var app = new Vue({ delimiters: ['[[',']]'], el: '#app' });
+
+</script>
+</body>
+</html>
